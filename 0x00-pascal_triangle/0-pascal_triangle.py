@@ -3,12 +3,13 @@
 
 
 def pascal_triangle(n):
-    """Returns a list of lists of integers representing the Pascal’s
+    """Returns a list of lists of integers representing the Pascalal
     triangle of n.
     Arguments:
         n (int): Height of the triangle.
     """
     triangle = []
+    
     for i in range(n):
         if i == 0:
             triangle.append([1])
