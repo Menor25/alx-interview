@@ -2,24 +2,48 @@
 """Defines the function island_perimeter."""
 
 
+def test0(n):
+    """
+    test if n is 0 or 1
+    @n: number of the grid
+    Returns: 0 if n is 1 or 1 if n is 0
+    """
+    if (n == 0):
+        return 1
+    return 0
+
+
 def island_perimeter(grid):
-    """Computes the perimeter of an island described in grid.
+    """
+    Computes the perimeter of an island described in grid.
     Returns the perimeter of the island.
     """
-    perimeter = 0
+    row = len(grid)
+    col = len(grid[0])
+    assert (1 <= row and col <= 100), "length must be between 1 an 100"
 
-    col = len(grid)
-    row = len(grid[0])
-
-    for i in range(col):
-        for j in range(row):
+    p = 0
+    for i in range(row):
+        for j in range(col):
+            assert (grid[i][j] == 0) or (grid[i][j] == 1),\
+                                        "grid numbers must be 0 or 1"
             if grid[i][j] == 1:
-                if i == 0 or grid[i - 1][j] == 0:
-                    perimeter += 1
-                if j == 0 or grid[i][j - 1] == 0:
-                    perimeter += 1
-                if i == len(grid) - 1 or grid[i + 1][j] == 0:
-                    perimeter += 1
-                if j == len(grid[i]) - 1 or grid[i][j + 1] == 0:
-                    perimeter += 1
-    return 
+                if i-1 < 0:
+                    p += 1
+                else:
+                    p += test0(grid[i-1][j])
+                if j-1 < 0:
+                    p += 1
+                else:
+                    p += test0(grid[i][j-1])
+
+                try:
+                    p += test0(grid[i+1][j])
+                except IndexError:
+                    p += 1
+                try:
+                    p += test0(grid[i][j+1])
+                except IndexError:
+                    p += 1
+
+    return p
